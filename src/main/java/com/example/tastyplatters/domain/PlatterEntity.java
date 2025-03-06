@@ -15,10 +15,10 @@ public class PlatterEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer id;
-    String title;
-    double price;
-    String description;
+    private Integer id;
+    private String title;
+    private double price;
+    private String description;
 
     @ManyToMany(mappedBy = "platters")
     @JsonIgnore

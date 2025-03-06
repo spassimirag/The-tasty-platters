@@ -20,12 +20,12 @@ public class OrderEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
-    Status status = Status.SUCCESSFULLY_SUBMITTED;
-    String username;
-    String address;
+    private Status status = Status.SUCCESSFULLY_SUBMITTED;
+    private String username;
+    private String address;
 
     @ManyToMany
     @JoinTable(name = "order_platters",

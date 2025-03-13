@@ -1,49 +1,25 @@
 package com.example.tastyplatters.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
+import com.example.tastyplatters.models.Role;
 
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "users")
-public class User implements UserDetails {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "_users")
+public class User {
 
     @GeneratedValue
-    @Id private String username;
+    @Id
+    private Integer id;
+    private String username;
     private String password;
-    private int phoneNumber;
+    @Getter
     @Enumerated(EnumType.STRING)
-    private ERole role;
+    private Role role = Role.USER;
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
 }
-

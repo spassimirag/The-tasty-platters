@@ -1,7 +1,7 @@
 package com.example.tastyplatters.service;
 
 import com.example.tastyplatters.models.Role;
-import com.example.tastyplatters.models.User;
+import com.example.tastyplatters.models.UserEntity;
 import com.example.tastyplatters.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,27 +27,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void registerUser(String username, String password) {
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(passwordEncoder.encode(password));
-            userRepository.save(user);
-    }
-
-    @Override
-    public Optional<User> findById(int id) {
+    public Optional<UserEntity> findById(int id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
-    public User save(User user) {
+    public UserEntity save(UserEntity user) {
         return userRepository.save(user);
     }
-
 
 }

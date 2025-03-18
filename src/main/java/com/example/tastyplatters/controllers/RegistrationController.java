@@ -1,7 +1,7 @@
 package com.example.tastyplatters.controllers;
 
+import com.example.tastyplatters.models.UserEntity;
 import com.example.tastyplatters.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +20,9 @@ public class RegistrationController {
 
 
     @PostMapping(value = "/registration")
-        public ResponseEntity<String> register(@RequestBody User user) {
-        userService.registerUser(user.getUsername(), user.getPassword());
-        return ResponseEntity.ok("User registered successfully");
+        public UserEntity register(@RequestBody UserEntity registeredUser) {
+        return userService.save(registeredUser);
+
         }
     }
 

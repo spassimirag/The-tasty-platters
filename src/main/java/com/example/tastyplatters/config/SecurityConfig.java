@@ -2,10 +2,6 @@ package com.example.tastyplatters.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -25,36 +21,29 @@ public class SecurityConfig {
     }
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers( "/tastyplatters/getall/orders").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout((logout) -> logout.permitAll());
+
+        return http.build();
     }
 
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                    .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/tastyplatters/register").permitAll()
-                            .requestMatchers("/tastyplatters/login").permitAll()
-                            .requestMatchers("tastyplatters/user**").hasRole("USER")
-                            .anyRequest().authenticated()                  // Everything else requires login
-                    )
-                    .formLogin(Customizer.withDefaults())
-                    .logout(Customizer.withDefaults());
-
-            return http.build();
-        }
-
-
 }
-
 // http
 //         .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())  //
 //        .csrf(csrf -> csrf.disable())  // Disable CSRF globally
 //        .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())); // Allow H2 Console iframes
 //
 //        return http.build();
+//
+//
+//

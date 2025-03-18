@@ -1,6 +1,5 @@
 package com.example.tastyplatters;
 
-import com.example.tastyplatters.models.User;
 import com.example.tastyplatters.repository.OrderRepository;
 import com.example.tastyplatters.repository.PlatterRepository;
 import com.example.tastyplatters.service.PlatterServiceImpl;
@@ -15,7 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class TheTastyPlatterApplication implements CommandLineRunner {
+public class TheTastyPlatterApplication {
+		//implements CommandLineRunner {
 
 	@Autowired
 	public PlatterRepository platterRepository;
@@ -29,10 +29,10 @@ public class TheTastyPlatterApplication implements CommandLineRunner {
 		SpringApplication.run(TheTastyPlatterApplication.class, args);
 
 		}
-
-	@Transactional
-	@Override
-	public void run(String... args) throws Exception {
+//
+//	@Transactional
+//	@Override
+//	public void run(String... args) throws Exception {
 
 
 //		PlatterEntity platter = PlatterEntity.builder().title("Tasty").price(10.55).description("Mandja").build();
@@ -50,5 +50,4 @@ public class TheTastyPlatterApplication implements CommandLineRunner {
 //orderRepository.save(order);
 
 	}
-}
 

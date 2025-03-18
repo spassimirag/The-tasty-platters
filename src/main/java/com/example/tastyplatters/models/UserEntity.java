@@ -11,7 +11,7 @@ import com.example.tastyplatters.models.Role;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "_users")
-public class User {
+public class UserEntity {
 
     @GeneratedValue
     @Id

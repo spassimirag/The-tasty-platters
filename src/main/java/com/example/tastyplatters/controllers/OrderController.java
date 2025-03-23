@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tastyplatters/user")
+@RequestMapping("/order")
 public class OrderController {
 
     private final OrderService orderService;
@@ -19,7 +19,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping(value = "/getall/orders")
+    @GetMapping(value = "/getall")
     public List<OrderEntity> getOrders() {
         return orderService.findAll();
     }
@@ -34,7 +34,7 @@ public class OrderController {
     }
 
 
-    @PostMapping(value = "/order")
+    @PostMapping(value = "/new/order")
     public OrderEntity create(@RequestBody OrderEntity order) {
        return orderService.save(order);
 

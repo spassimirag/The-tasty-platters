@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -25,14 +27,20 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/tastyplatters/getall/orders").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/platter/getall")
+                                .permitAll()
+                        .requestMatchers( "/order/getall")
+                        .permitAll()
+                       // .requestMatchers( "/tastyplatters/platter/getall/platters").permitAll()
+                       // .requestMatchers( "/tastyplatters/order/new/order").permitAll()
+//                        .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .logout((logout) -> logout.permitAll())
+                .httpBasic(withDefaults());
 
         return http.build();
     }
